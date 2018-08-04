@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GameStartButton from "../GameStartButton";
+import GameStatusBar from "../GameStatusBar";
 import ProblemStatement from "../ProblemStatement";
 import SolutionForm from "../SolutionForm";
 import PlayersList from "../PlayersList";
@@ -68,7 +68,7 @@ export default class Game extends Component {
     return (
       <div classname="game">
         {/*<SolutionsList solutions={this.state.solutions} />*/}
-        <GameStartButton startGame={this.startGame} gameHasStarted={this.state.gameHasStarted} />
+        <GameStatusBar startGame={this.startGame} gameHasStarted={this.state.gameHasStarted} />
         <ProblemStatement problem={this.state.problem} />
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
         <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.handleSolutionSubmit} />
