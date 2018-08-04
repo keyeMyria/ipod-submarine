@@ -1,0 +1,17 @@
+@import "~@blueprintjs/core/lib/scss/variables";
+
+h1.bp3-heading {
+    color: $turquoise5;
+    font-family: 'Space Mono', 'Work Sans', 'Arial', sans-serif;
+    font-weight: 700;
+    padding: 0.5em 0 0.5em 0.1em;
+    span {
+        color: $vermilion5;
+    }
+    [data-icon='lightbulb'] {
+        color: $gold5;
+    }
+    [data-icon='trending-up'] {
+        color: $forest5;
+    }
+}

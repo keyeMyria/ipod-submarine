@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from "@blueprintjs/core";
+import { Card, H4, Tag } from "@blueprintjs/core";
 import './PlayersList.scss';
 
 export default class PlayersList extends Component {
@@ -8,7 +8,7 @@ export default class PlayersList extends Component {
     return players.map((player, i) =>
         <Card key={i}>
             <p>{player.username}</p>
-            <span>{player.points}</span>
+            <Tag>Points: {player.points}</Tag>
         </Card>
     );
   }
@@ -17,7 +17,9 @@ export default class PlayersList extends Component {
     const players = this.props.players;
     return (
       <div className="players-list">
-        <div className="player-name">Hello, <b>{this.props.currentUser}</b></div>
+        <div className="player-name">
+          <H4>Hello, {this.props.currentUser}</H4>
+        </div>
         <div className="players-container">
           {this.renderPlayers(players)}
         </div>

@@ -1,0 +1,16 @@
+@import "~@blueprintjs/core/lib/scss/variables";
+
+body {
+    background: #394B59;
+}
+
+h4.bp3-heading {
+    color: $cobalt1;
+    font-family: 'Work Sans', 'Arial', sans-serif;
+}
+
+.bp3-ui-text {
+    font-family: 'Work Sans', 'Arial', sans-serif;
+}
+
+@import '~@blueprintjs/core/lib/css/blueprint.css';

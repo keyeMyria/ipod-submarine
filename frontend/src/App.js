@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
+import TopLogo from './components/TopLogo'
 import LandingPage from './components/LandingPage'
 import Game from './components/Game'
 import WebSocketInstance from './services/WebSocket'
@@ -26,6 +27,7 @@ export default class App extends Component {
 
     return (
       <div className="App">
+        <TopLogo />
         { 
           loggedIn ?
           <Game

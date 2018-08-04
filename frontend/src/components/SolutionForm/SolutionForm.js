@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, InputGroup } from "@blueprintjs/core";
+import { Button, InputGroup, H4 } from "@blueprintjs/core";
 import './SolutionForm.scss';
 
 export default class SolutionForm extends Component {
@@ -20,7 +20,7 @@ export default class SolutionForm extends Component {
   render() {
     return (
       <div className="solution-form">
-        <h4>Write your solution in two words or less.</h4>
+        <H4>Write your solution in two words or less.</H4>
         <form onSubmit={() => this.props.handleSolutionSubmit(this.state.solution)} className="form">
             <InputGroup id="text-input" leftIcon="edit" placeholder="Spicy Cheetos" onChange={this.solutionChangeHandler} />
             <Button icon="enter" text="Submit Solution" type="submit" />
