@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, InputGroup } from "@blueprintjs/core";
-import './InitGame.scss';
+import './LandingPage.scss';
 
-export default class InitForm extends Component {
+export default class LandingPage extends Component {
 
   constructor(props) {
       super(props);

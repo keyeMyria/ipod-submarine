@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import InitGame from './components/InitGame'
+import LandingPage from './components/LandingPage'
 import Game from './components/Game'
 import WebSocketInstance from './services/WebSocket'
 
@@ -32,7 +32,7 @@ export default class App extends Component {
             currentUser={username}
           />
           :
-          <InitGame
+          <LandingPage
             onSubmit={this.handleLoginSubmit}
             usernameChangeHandler={this.usernameChangeHandler}
           />
