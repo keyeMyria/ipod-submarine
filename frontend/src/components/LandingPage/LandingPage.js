@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, InputGroup } from "@blueprintjs/core";
+import { Button, Card, Elevation, FormGroup, InputGroup } from "@blueprintjs/core";
 import './LandingPage.scss';
 
 export default class LandingPage extends Component {
@@ -20,16 +20,17 @@ export default class LandingPage extends Component {
   render() {
     return (
       <div className="login">
-        <FormGroup
+        <Card elevation={Elevation.FOUR}>
+          <FormGroup
             label="Join iPod Submarine"
             labelFor="text-input"
-            labelInfo="(required)"
-        >
-            <form onSubmit={() => this.props.onSubmit(this.state.username)} className="form">
+            labelInfo="(required)">
+              <form onSubmit={() => this.props.onSubmit(this.state.username)} className="form">
                 <InputGroup id="text-input" leftIcon="person" placeholder="John Doe" onChange={this.usernameChangeHandler} />
                 <Button icon="log-in" text="Join Game" type="submit" />
-            </form>
-        </FormGroup>
+              </form>
+          </FormGroup>
+        </Card>
       </div>
     );
   }
