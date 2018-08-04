@@ -10,6 +10,7 @@ export default class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      gameHasStarted: false,
       players: [],
       solutions: [],
       problem: "help"
@@ -56,14 +57,16 @@ export default class Game extends Component {
   }
 
   startGame = (event) => {
+    this.setState({ gameHasStarted: true});
     console.log('hey');
+    // get problem
   }
 
   render() {
     return (
       <div classname="game">
         {/*<SolutionsList solutions={this.state.solutions} />*/}
-        <GameStartButton startGame={this.startGame} />
+        <GameStartButton startGame={this.startGame} gameHasStarted={this.state.gameHasStarted} />
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
         <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.handleSolutionSubmit} />
       </div>
