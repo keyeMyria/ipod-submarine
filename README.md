@@ -37,6 +37,8 @@ Install requirements and run
 cd game
 sudo apt install redis-server
 pip3 install -r requirements.txt
+python3 manage.py makemigrations
+python3 manage.py migrate
 redis-server & python3 manage.py runserver 0:8000
 ```
 
@@ -54,4 +56,9 @@ yarn start
 
 ---
 
-To do: MANY THINGS
+To do:
+
+1. we can rewrite some stateless components as functions
+2. rename things that are confusing (like problem text is just 'text' but solution text is 'solution_text')
+3. try to separate game logic js functions into different files
+4. haven't even gotten into implementing the game yet

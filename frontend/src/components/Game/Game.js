@@ -8,15 +8,18 @@ import WebSocketInstance from '../../services/WebSocket'
 export default class Game extends Component {
   constructor(props) {
     super(props);
-    this.state = {players: []}
+    this.state = {
+      players: [],
+      solutions: []
+    };
 
     this.waitForSocketConnection(() => {
       WebSocketInstance.initGamePlayer(this.props.currentUser);
-      WebSocketInstance.addCallbacks(this.setPlayers.bind(this), this.addPlayer.bind(this))
+      WebSocketInstance.addCallbacks(this.setPlayers.bind(this), this.addPlayer.bind(this));
       WebSocketInstance.fetchPlayers();
+      //WebSocketInstance.addCallbacks(this.setSolutions.bind(this), this.addSolution.bind(this));
     });
   }
-
   waitForSocketConnection(callback) {
     const component = this;
     setTimeout(
@@ -46,13 +49,16 @@ export default class Game extends Component {
   setSolutions(solutions) {
     this.setState({ solutions: solutions})
   }*/
+  handleSolutionSubmit = (solution) => {
+    WebSocketInstance.newSolution(solution, this.props.currentUser, "help");
+  }
 
   render() {
     return (
       <div classname="game">
         {/*<SolutionsList solutions={this.state.solutions} />*/}
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
-        <SolutionForm currentUser={this.props.currentUser} />
+        <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.handleSolutionSubmit} />
       </div>
     );
   }
