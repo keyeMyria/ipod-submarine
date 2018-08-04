@@ -1,0 +1,19 @@
+.players-list {
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.8);
+
+    .player-name {
+        background: #EBF1F5;
+        box-shadow: 0px 2px 2px 0px #BFCCD6;
+        padding: 2em;
+        text-transform: uppercase;
+    }
+    .players-container {
+        background: #F5F8FA;
+        display: flex;
+        flex-flow: row wrap;
+        padding: 1em;
+        .bp3-card {
+            margin-right: 1em;
+        }
+    }
+}
