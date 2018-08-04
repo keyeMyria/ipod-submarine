@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GameStartButton from "../GameStartButton";
+import ProblemStatement from "../ProblemStatement";
 import SolutionForm from "../SolutionForm";
 import PlayersList from "../PlayersList";
 import './Game.scss';
@@ -13,7 +14,7 @@ export default class Game extends Component {
       gameHasStarted: false,
       players: [],
       solutions: [],
-      problem: "help"
+      problem: "this is my problem"
     };
 
     this.waitForSocketConnection(() => {
@@ -60,6 +61,7 @@ export default class Game extends Component {
     this.setState({ gameHasStarted: true});
     console.log('hey');
     // get problem
+    // problem has whoever alan is
   }
 
   render() {
@@ -67,6 +69,7 @@ export default class Game extends Component {
       <div classname="game">
         {/*<SolutionsList solutions={this.state.solutions} />*/}
         <GameStartButton startGame={this.startGame} gameHasStarted={this.state.gameHasStarted} />
+        <ProblemStatement problem={this.state.problem} />
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
         <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.handleSolutionSubmit} />
       </div>
