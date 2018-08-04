@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GameStartButton from "../GameStartButton";
 import SolutionForm from "../SolutionForm";
 import PlayersList from "../PlayersList";
 import './Game.scss';
@@ -10,7 +11,8 @@ export default class Game extends Component {
     super(props);
     this.state = {
       players: [],
-      solutions: []
+      solutions: [],
+      problem: "help"
     };
 
     this.waitForSocketConnection(() => {
@@ -50,13 +52,18 @@ export default class Game extends Component {
     this.setState({ solutions: solutions})
   }*/
   handleSolutionSubmit = (solution) => {
-    WebSocketInstance.newSolution(solution, this.props.currentUser, "help");
+    WebSocketInstance.newSolution(solution, this.props.currentUser, this.state.problem);
+  }
+
+  startGame = (event) => {
+    console.log('hey');
   }
 
   render() {
     return (
       <div classname="game">
         {/*<SolutionsList solutions={this.state.solutions} />*/}
+        <GameStartButton startGame={this.startGame} />
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
         <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.handleSolutionSubmit} />
       </div>
