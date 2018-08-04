@@ -14,7 +14,9 @@ export default class Game extends Component {
       gameHasStarted: false,
       players: [],
       solutions: [],
-      problem: "this is my problem"
+      problem: "this is my problem",
+      roundNumber: 1,
+      roundHasEnded: false,
     };
 
     this.waitForSocketConnection(() => {
@@ -59,16 +61,22 @@ export default class Game extends Component {
 
   startGame = (event) => {
     this.setState({ gameHasStarted: true});
-    console.log('hey');
-    // get problem
-    // problem has whoever alan is
+    this.startRound();
+  }
+  startRound() {
+    // get random problem from backend
+    this.setState({ problem: 'nah nah nah'});
+
   }
 
   render() {
     return (
       <div classname="game">
         {/*<SolutionsList solutions={this.state.solutions} />*/}
-        <GameStatusBar startGame={this.startGame} gameHasStarted={this.state.gameHasStarted} />
+        <GameStatusBar startGame={this.startGame}
+          gameHasStarted={this.state.gameHasStarted}
+          playerCount={this.state.players.length}
+          roundNumber={this.state.roundNumber} />
         <ProblemStatement problem={this.state.problem} />
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
         <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.handleSolutionSubmit} />

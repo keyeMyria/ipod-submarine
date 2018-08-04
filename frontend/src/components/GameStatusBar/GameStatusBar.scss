@@ -1,3 +1,15 @@
+@import "~@blueprintjs/core/lib/scss/variables";
+
 .game-status-bar {
     margin-bottom: 1em;
+    .game-status-bar-information {
+        display: inline;
+        margin-left: 1em;
+        span {
+            border: 1px solid $gray5;
+            border-radius: 3px;
+            margin-left: 1em;
+            padding: 0.4em;
+        }
+    }
 }

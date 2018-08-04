@@ -9,8 +9,10 @@ export default class GameStatusbar extends Component {
       <div className="game-status-bar">
         <Card elevation={Elevation.FOUR}>
           <GameStartButton startGame={this.props.startGame} gameHasStarted={this.props.gameHasStarted} />
-          <span className="player-count">{this.props.playerCount} players | </span>
-          <span className="round-number">Round #{this.props.roundNumber}</span>
+          <article className="game-status-bar-information">
+            <span className="player-count">{this.props.playerCount} players</span>
+            <span className="round-number">Round #{this.props.roundNumber}</span>
+          </article>
         </Card>
       </div>
     );
