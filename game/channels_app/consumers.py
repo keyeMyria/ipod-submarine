@@ -2,6 +2,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 import json
 from game.core.models.game_models import Player, Problem, Solution
+import game.channels_app.helpers as helpers
 
 class GameConsumer(WebsocketConsumer):
     def connect(self):
@@ -45,7 +46,7 @@ class GameConsumer(WebsocketConsumer):
         players = Player.objects.all()
         content = {
             'command': 'fetch_players',
-            'players': self.players_to_json(players) # Helpers
+            'players': helpers.players_to_json(players)
         }
         self.send_message(content)
     
@@ -61,16 +62,6 @@ class GameConsumer(WebsocketConsumer):
             'solution': solution_text
         }
         self.send_message(content)
-    
-    # Helpers
-    def players_to_json(self, players):
-        result = []
-        for player in players:
-            result.append({
-                'username': str(player),
-                'points': str(player.points)
-            })
-        return result
     
     commands = {
         'init_game': init_game,
