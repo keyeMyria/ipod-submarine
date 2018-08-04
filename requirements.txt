@@ -1,0 +1,8 @@
+django==2.0
+
+channels==2.0
+channels_redis==2.2.1
+
+psycopg2-binary==2.7.4
+
+django_extensions==2.1.0
