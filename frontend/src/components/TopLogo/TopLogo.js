@@ -9,7 +9,7 @@ export default class TopLogo extends Component {
         <H1>
           <Icon icon="lightbulb" iconSize={40} />
           <Icon icon="trending-up" iconSize={40} />
-          iPod <span>Submarine</span>
+          iPod_<span>Submarine</span>
         </H1>
       </div>
     );

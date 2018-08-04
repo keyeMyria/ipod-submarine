@@ -4,14 +4,12 @@ import json
 from game.core.models.game_models import Player, Problem, Solution
 
 class GameConsumer(WebsocketConsumer):
-
     def connect(self):
         self.game_room_name = 'ipod_submarine'
         async_to_sync(self.channel_layer.group_add)(
             self.game_room_name,
             self.channel_name
         )
-        print("whatever")
         self.accept()
     
     def disconnect(self, close_code):
@@ -22,13 +20,15 @@ class GameConsumer(WebsocketConsumer):
     
     def receive(self, text_data):
         data = json.loads(text_data)
+        self.map_command_to_function(data)
+    
+    def map_command_to_function(self, data):
         self.commands[data['command']](self, data)
     
     def send_message(self, message):
         self.send(text_data=json.dumps(message))
 
     # Game Commands
-
     def init_game(self, data):
         username = data['username']
         player, created = Player.objects.get_or_create(username=username)
@@ -63,7 +63,6 @@ class GameConsumer(WebsocketConsumer):
         self.send_message(content)
     
     # Helpers
-    
     def players_to_json(self, players):
         result = []
         for player in players:
