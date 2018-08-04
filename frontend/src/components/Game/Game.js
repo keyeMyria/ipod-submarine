@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SolutionForm from "../SolutionForm";
 import PlayersList from "../PlayersList";
 import './Game.scss';
 
@@ -35,15 +36,23 @@ export default class Game extends Component {
   addPlayer(player) {
     this.setState({ players: [...this.state.players, player]})
   }
-
   setPlayers(players) {
     this.setState({ players: players})
   }
 
+  /*addSolution(solution) {
+    this.setState({ solutions: [...this.state.solutions, solution]})
+  }
+  setSolutions(solutions) {
+    this.setState({ solutions: solutions})
+  }*/
+
   render() {
     return (
       <div classname="game">
+        {/*<SolutionsList solutions={this.state.solutions} />*/}
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
+        <SolutionForm currentUser={this.props.currentUser} />
       </div>
     );
   }

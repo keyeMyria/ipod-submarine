@@ -10,7 +10,7 @@ class Player(AbstractUser):
         return self.username
 
 class Problem(models.Model):
-    alan = models.ForeignKey('Player', on_delete=models.CASCADE)
+    alan = models.ForeignKey('Player', on_delete=models.CASCADE, default=1)
     text = models.CharField(max_length=100)
 
     def get_alans_solution(self):
@@ -30,6 +30,9 @@ class Solution(models.Model):
     author = models.ForeignKey('Player', on_delete=models.CASCADE)
     problem = models.ForeignKey('Problem', on_delete=models.CASCADE, related_name='proposed_solutions')
 
+    def __str__(self):
+        return self.solution_text
+    
     def get_all_guesses(self):
         return self.guesses
 

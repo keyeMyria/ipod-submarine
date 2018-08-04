@@ -12,7 +12,6 @@ export default class InitForm extends Component {
     }
 
   usernameChangeHandler = (event) =>  {
-      console.log(event.target.value);
     this.setState({
       username: event.target.value
     })
