@@ -1,0 +1,12 @@
+@import "~@blueprintjs/core/lib/scss/variables";
+
+.problem-statement {
+    h3 {
+        .problem-urgent-label {
+            color: $rose4;
+        }
+        [data-icon='hand-right'] {
+            color: $gold5;
+        }
+    }
+}
