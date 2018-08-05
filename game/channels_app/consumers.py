@@ -55,6 +55,7 @@ class GameConsumer(WebsocketConsumer):
         content = {
             'command': 'new_problem',
             'problem': problem,
+            'alan': 'usernameofalan',
         }
         self.send_message(content)
     

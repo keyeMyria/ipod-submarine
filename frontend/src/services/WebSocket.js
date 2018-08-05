@@ -50,14 +50,13 @@ class WebSocketService {
     //  this.callbacks[command](parsedData.solution);
     //}
     if (command === 'new_problem') {
-      this.callbacks[command](parsedData.problem);
+      this.callbacks[command](parsedData.problem, parsedData.alan);
     }
   }
 
   addPlayer(username) {
     this.sendMessage({command: 'add_player', username: username});
   }
-
   fetchPlayers() {
     this.sendMessage({ command: 'fetch_players'});
   }
