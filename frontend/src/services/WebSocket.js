@@ -39,23 +39,23 @@ class WebSocketService {
     const command = parsedData.command;
     if (Object.keys(this.callbacks).length === 0) {
       return;
-    }/*
-    if (command === 'messages') {
-      this.callbacks[command](parsedData.messages);
     }
-    if (command === 'new_message') {
-      this.callbacks[command](parsedData.message);
-    }*/
+    if (command === 'add_player' ) {
+      this.callbacks[command](parsedData.players);
+    }
     if (command === 'fetch_players' ) {
       this.callbacks[command](parsedData.players);
     }
-    if (command === 'send_new_solution') {
-      this.callbacks[command](parsedData.solution);
+    //if (command === 'new_solution') {
+    //  this.callbacks[command](parsedData.solution);
+    //}
+    if (command === 'new_problem') {
+      this.callbacks[command](parsedData.problem);
     }
   }
 
   addPlayer(username) {
-    this.sendMessage({command: 'init_game', username: username});
+    this.sendMessage({command: 'add_player', username: username});
   }
 
   fetchPlayers() {
@@ -70,9 +70,12 @@ class WebSocketService {
     this.sendMessage({command: 'new_solution', solution: solution, username: username, problem: problem});
   }
 
-  addCallbacks(playersCallback, newSolutionCallback) {
+  addPlayerCallbacks(playersCallback, newPlayerCallback) {
     this.callbacks['fetch_players'] = playersCallback;
-    this.callbacks['new_solution'] = newSolutionCallback;
+    this.callbacks['add_player'] = newPlayerCallback;
+  }
+  addProblemCallback(problemCallback) {
+    this.callbacks['new_problem'] = problemCallback;
   }
   
   sendMessage(data) {

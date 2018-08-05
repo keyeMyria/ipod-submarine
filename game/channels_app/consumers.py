@@ -30,7 +30,7 @@ class GameConsumer(WebsocketConsumer):
         self.send(text_data=json.dumps(message))
 
     # Game Commands
-    def init_game(self, data):
+    def add_player(self, data):
         username = data['username']
         player, created = Player.objects.get_or_create(username=username)
         content = {
@@ -50,8 +50,13 @@ class GameConsumer(WebsocketConsumer):
         }
         self.send_message(content)
     
-    #def new_problem(self, data):
-
+    def new_problem(self, data):
+        problem = 'help urgent problem'
+        content = {
+            'command': 'new_problem',
+            'problem': problem,
+        }
+        self.send_message(content)
     
     def new_solution(self, data):
         username = data['username']
@@ -67,8 +72,8 @@ class GameConsumer(WebsocketConsumer):
         self.send_message(content)
     
     commands = {
-        'init_game': init_game,
+        'add_player': add_player,
         'fetch_players': fetch_players,
         'new_solution': new_solution,
-        #'new_problem': new_problem,
+        'new_problem': new_problem,
     }
