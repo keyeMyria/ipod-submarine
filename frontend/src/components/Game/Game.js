@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import GameStatusBar from "../GameStatusBar";
-import ProblemStatement from "../ProblemStatement";
-import SolutionForm from "../SolutionForm";
+import ConditionalProblemDisplay from "../ConditionalProblemDisplay";
 import PlayersList from "../PlayersList";
 import './Game.scss';
 
@@ -65,16 +64,20 @@ export default class Game extends Component {
   }
 
   render() {
+    const gameHasStarted = this.state.gameHasStarted;
     return (
       <div className="game">
         {/*<SolutionsList solutions={this.state.solutions} />*/}
         <GameStatusBar startGame={this.startGame}
-          gameHasStarted={this.state.gameHasStarted}
+          gameHasStarted={gameHasStarted}
           playerCount={this.state.players.length}
           roundNumber={this.state.roundNumber} />
-        <ProblemStatement problem={this.state.problem} />
+        <ConditionalProblemDisplay
+          gameHasStarted = {gameHasStarted}
+          problem={this.state.problem}
+          currentUser={this.props.currentUser}
+          handleSolutionSubmit={this.handleSolutionSubmit} />
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
-        <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.handleSolutionSubmit} />
       </div>
     );
   }
