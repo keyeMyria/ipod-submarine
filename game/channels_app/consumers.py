@@ -50,6 +50,9 @@ class GameConsumer(WebsocketConsumer):
         }
         self.send_message(content)
     
+    #def new_problem(self, data):
+
+    
     def new_solution(self, data):
         username = data['username']
         solution_text = data['solution']
@@ -67,4 +70,5 @@ class GameConsumer(WebsocketConsumer):
         'init_game': init_game,
         'fetch_players': fetch_players,
         'new_solution': new_solution,
+        #'new_problem': new_problem,
     }

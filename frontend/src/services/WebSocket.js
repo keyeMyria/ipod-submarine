@@ -49,12 +49,12 @@ class WebSocketService {
     if (command === 'fetch_players' ) {
       this.callbacks[command](parsedData.players);
     }
-    if (command === 'new_solution') {
+    if (command === 'send_new_solution') {
       this.callbacks[command](parsedData.solution);
     }
   }
 
-  initGamePlayer(username) {
+  addPlayer(username) {
     this.sendMessage({command: 'init_game', username: username});
   }
 
@@ -62,7 +62,11 @@ class WebSocketService {
     this.sendMessage({ command: 'fetch_players'});
   }
 
-  newSolution(solution, username, problem) {
+  getNewProblem() {
+    this.sendMessage({ command: 'new_problem'});
+  }
+
+  sendNewSolution(solution, username, problem) {
     this.sendMessage({command: 'new_solution', solution: solution, username: username, problem: problem});
   }
 

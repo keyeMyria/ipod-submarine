@@ -20,7 +20,7 @@ export default class Game extends Component {
     };
 
     this.waitForSocketConnection(() => {
-      WebSocketInstance.initGamePlayer(this.props.currentUser);
+      WebSocketInstance.addPlayer(this.props.currentUser);
       WebSocketInstance.addCallbacks(this.setPlayers.bind(this), this.addPlayer.bind(this));
       WebSocketInstance.fetchPlayers();
       //WebSocketInstance.addCallbacks(this.setSolutions.bind(this), this.addSolution.bind(this));
@@ -42,23 +42,6 @@ export default class Game extends Component {
     }, 100); // wait 100 milisecond for the connection...
   }
 
-  addPlayer(player) {
-    this.setState({ players: [...this.state.players, player]})
-  }
-  setPlayers(players) {
-    this.setState({ players: players})
-  }
-
-  /*addSolution(solution) {
-    this.setState({ solutions: [...this.state.solutions, solution]})
-  }
-  setSolutions(solutions) {
-    this.setState({ solutions: solutions})
-  }*/
-  handleSolutionSubmit = (solution) => {
-    WebSocketInstance.newSolution(solution, this.props.currentUser, this.state.problem);
-  }
-
   startGame = (event) => {
     this.setState({ gameHasStarted: true});
     this.startRound();
@@ -66,7 +49,21 @@ export default class Game extends Component {
   startRound() {
     // get random problem from backend
     this.setState({ problem: 'nah nah nah'});
+  }
+  //startRound(problem) {
+    // get random problem from backend
+  //  this.setState({ problem: 'nah nah nah'});
+  //}
 
+  addPlayer(player) {
+    this.setState({ players: [...this.state.players, player]})
+  }
+  setPlayers(players) {
+    this.setState({ players: players})
+  }
+
+  handleSolutionSubmit = (solution) => {
+    WebSocketInstance.sendNewSolution(solution, this.props.currentUser, this.state.problem);
   }
 
   render() {
