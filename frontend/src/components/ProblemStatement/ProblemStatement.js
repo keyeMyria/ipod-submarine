@@ -10,6 +10,7 @@ export default class ProblemStatement extends Component {
             <H3>
                 <Icon icon="hand-right" iconSize={25} />
                 <span className="problem-urgent-label"> URGENT:</span>
+                <span>{this.props.alan}</span>
                 <span className="problem-text"> {this.props.problem}</span>
             </H3>
         </Card>

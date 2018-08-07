@@ -5,6 +5,7 @@ from game.core.models.validators import validate_solution_length
 
 class Player(AbstractUser):
     points = models.IntegerField(default=0) # player receives points when he correctly guesses who Alan is
+    #has_been_alan = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username

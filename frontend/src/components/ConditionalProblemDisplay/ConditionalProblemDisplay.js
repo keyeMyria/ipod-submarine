@@ -11,7 +11,7 @@ export default class ConditionalProblemDisplay extends Component {
       <div className="conditional-problem-display">
         {gameHasStarted ?
             <section className="problem-with-solution-form">
-                <ProblemStatement problem={this.props.problem} />
+                <ProblemStatement problem={this.props.problem} alan={this.props.alan} />
                 <SolutionForm currentUser={this.props.currentUser} handleSolutionSubmit={this.props.handleSolutionSubmit} />
             </section>
         :

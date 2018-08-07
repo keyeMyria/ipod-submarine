@@ -51,11 +51,14 @@ class GameConsumer(WebsocketConsumer):
         self.send_message(content)
     
     def new_problem(self, data):
-        problem = 'help urgent problem'
+        text = helpers.pick_random_problem()
+        alan = helpers.pick_random_alan()
+        problem = Problem(alan=alan, text=text)
+        problem.save()
         content = {
             'command': 'new_problem',
-            'problem': problem,
-            'alan': 'usernameofalan',
+            'problem': problem.text,
+            'alan': str(problem.alan),
         }
         self.send_message(content)
     

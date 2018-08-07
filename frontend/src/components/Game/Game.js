@@ -75,6 +75,7 @@ export default class Game extends Component {
         <ConditionalProblemDisplay
           gameHasStarted = {gameHasStarted}
           problem={this.state.problem}
+          alan={this.state.alan}
           currentUser={this.props.currentUser}
           handleSolutionSubmit={this.handleSolutionSubmit} />
         <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
