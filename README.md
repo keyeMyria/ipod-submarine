@@ -61,6 +61,7 @@ To do:
 1. we can rewrite some stateless components as functions
 2. rename things that are confusing (like problem text is just 'text' but solution text is 'solution_text')
 3. try to separate game logic js functions into different files
-4. haven't even gotten into implementing the game yet
-5. player deleted on disconnect
-6. 
+4. delete Player object on disconnect
+5. set random problems
+6. set alan
+7. implement persistent username state until disconnect
