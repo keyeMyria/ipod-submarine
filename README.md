@@ -65,3 +65,4 @@ To do:
 5. set random problems
 6. set alan
 7. implement persistent username state until disconnect
+8. BROADCAST TO CHANNEL NOT JUST TO ONE PERSON
