@@ -51,8 +51,7 @@ export default class Game extends Component {
     WebSocketInstance.getNewProblem();
   }
   setProblem(problem, alan) {
-    this.setState({ problem: problem});
-    this.setState({ alan: alan});
+    this.setState({ problem: problem, alan: alan});
   }
 
   addPlayer(player) {
