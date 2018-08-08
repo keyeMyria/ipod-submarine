@@ -4,6 +4,8 @@ from game.core.models.game_models import Player, Problem, Solution
 import game.channels_app.helpers as helpers
 import json
 
+# group layer documentation for future reference
+# https://channels.readthedocs.io/en/latest/topics/channel_layers.html
 class GameConsumer(WebsocketConsumer):
     def connect(self):
         self.game_room_name = 'ipod_submarine'
@@ -23,7 +25,7 @@ class GameConsumer(WebsocketConsumer):
     def receive(self, text_data):
         data = json.loads(text_data)
         self.map_command_to_function(data)
-    
+
     def map_command_to_function(self, data):
         self.commands[data['command']](self, data)
     
@@ -51,6 +53,13 @@ class GameConsumer(WebsocketConsumer):
             'players': helpers.players_to_json(players)
         }
         self.send_message(content)
+        async_to_sync(self.channel_layer.group_send)(
+            self.game_room_name,
+            {
+                'type': 'fetch_players',
+                'message': content
+            }
+        )
     
     def new_problem(self, data):
         text = helpers.pick_random_problem()
