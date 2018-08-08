@@ -69,12 +69,10 @@ class WebSocketService {
     this.sendMessage({command: 'new_solution', solution: solution, username: username, problem: problem});
   }
 
-  addPlayerCallbacks(playersCallback, newPlayerCallback) {
-    this.callbacks['fetch_players'] = playersCallback;
-    this.callbacks['add_player'] = newPlayerCallback;
-  }
-  addProblemCallback(problemCallback) {
-    this.callbacks['new_problem'] = problemCallback;
+  addCallbacks(callbacks) {
+    for (const [key, value] of Object.entries(callbacks)) {
+      this.callbacks[key] = value;
+    };
   }
   
   sendMessage(data) {

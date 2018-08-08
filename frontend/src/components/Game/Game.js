@@ -20,8 +20,11 @@ export default class Game extends Component {
     };
     this.waitForSocketConnection(() => {
       WebSocketInstance.addPlayer(this.props.currentUser);
-      WebSocketInstance.addPlayerCallbacks(this.setPlayers.bind(this), this.addPlayer.bind(this));
-      WebSocketInstance.addProblemCallback(this.setProblem.bind(this));
+      WebSocketInstance.addCallbacks({
+        'fetch_players': this.setPlayers.bind(this),
+        'add_player': this.addPlayer.bind(this),
+        'new_problem': this.setProblem.bind(this)
+      });
       WebSocketInstance.fetchPlayers();
     });
   }
