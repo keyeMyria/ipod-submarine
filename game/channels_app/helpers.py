@@ -1,5 +1,5 @@
 # Helper functions
-from game.core.models.game_models import Player
+from game.core.models.game_models import Player, Problem
 from game.problems import problems
 import random
 
@@ -19,4 +19,10 @@ def pick_random_alan():
 
 def pick_random_problem():
     problem = random.sample(problems, 1)[0]
+    return problem
+
+def create_random_problem():
+    text = pick_random_problem()
+    alan = pick_random_alan()
+    problem = Problem.objects.create(alan=alan, text=text)
     return problem

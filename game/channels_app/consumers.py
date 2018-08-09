@@ -62,10 +62,7 @@ class GameConsumer(WebsocketConsumer):
         )
     
     def new_problem(self, data):
-        text = helpers.pick_random_problem()
-        alan = helpers.pick_random_alan()
-        problem = Problem(alan=alan, text=text)
-        problem.save()
+        problem = helpers.create_random_problem();
         content = {
             'command': 'new_problem',
             'problem': problem.text,
