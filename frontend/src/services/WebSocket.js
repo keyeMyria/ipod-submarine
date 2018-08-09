@@ -34,6 +34,7 @@ class WebSocketService {
     };
   }
 
+  // When front end receives command, parse data and find callback
   socketNewMessage(data) {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
@@ -46,29 +47,29 @@ class WebSocketService {
     if (command === 'fetch_players' ) {
       this.callbacks[command](parsedData.players);
     }
-    //if (command === 'new_solution') {
-    //  this.callbacks[command](parsedData.solution);
-    //}
+    if (command === 'new_solution') {
+      this.callbacks[command](parsedData.solution);
+    }
     if (command === 'new_problem') {
       this.callbacks[command](parsedData.problem, parsedData.alan);
     }
   }
 
+  // Send commands to back end
   addPlayer(username) {
     this.sendMessage({command: 'add_player', username: username});
   }
   fetchPlayers() {
     this.sendMessage({ command: 'fetch_players'});
   }
-
   getNewProblem() {
     this.sendMessage({ command: 'new_problem'});
   }
-
   sendNewSolution(solution, username, problem) {
     this.sendMessage({command: 'new_solution', solution: solution, username: username, problem: problem});
   }
 
+  // Add callbacks for when commands are received from back end
   addCallbacks(callbacks) {
     for (const [key, value] of Object.entries(callbacks)) {
       this.callbacks[key] = value;

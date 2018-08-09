@@ -14,16 +14,17 @@ export default class Game extends Component {
       players: [],
       solutions: [],
       problem: '',
-      alan: '',
-      roundNumber: 0,
-      roundHasEnded: false,
+      alan: '', // alan's username
+      roundNumber: 0, // how many rounds have gone by?
+      roundHasEnded: false, // is the round still going?
     };
     this.waitForSocketConnection(() => {
       WebSocketInstance.addPlayer(this.props.currentUser);
       WebSocketInstance.addCallbacks({
         'fetch_players': this.setPlayers.bind(this),
         'add_player': this.addPlayer.bind(this),
-        'new_problem': this.setProblem.bind(this)
+        'new_problem': this.setProblem.bind(this),
+        'new_solution': this.addSolution.bind(this),
       });
       WebSocketInstance.fetchPlayers();
     });
@@ -42,27 +43,33 @@ export default class Game extends Component {
     }, 100); // wait 100 milisecond for the connection...
   }
 
-  startGame = (event) => {
-    this.setState({ gameHasStarted: true});
-    this.startRound();
-  }
-  startRound() {
-    this.setState({ roundNumber: this.state.roundNumber+1});
-    WebSocketInstance.getNewProblem();
-  }
+  // Callbacks
   setProblem(problem, alan) {
     this.setState({ problem: problem, alan: alan});
   }
-
   addPlayer(player) {
     this.setState({ players: [...this.state.players, player]});
   }
   setPlayers(players) {
     this.setState({ players: players});
   }
+  addSolution(solution) {
+    this.setState({ solutions: [...this.state.solutions, solution]});
+  }
 
+  // Event handlers
   handleSolutionSubmit = (solution) => {
     WebSocketInstance.sendNewSolution(solution, this.props.currentUser, this.state.problem);
+  }
+  startGame = (event) => {
+    this.setState({ gameHasStarted: true});
+    this.startRound();
+  }
+
+  // Other actions
+  startRound() {
+    this.setState({ roundNumber: this.state.roundNumber+1});
+    WebSocketInstance.getNewProblem();
   }
 
   render() {
