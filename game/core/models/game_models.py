@@ -5,7 +5,7 @@ from game.core.models.validators import validate_solution_length
 
 class Player(AbstractUser):
     points = models.IntegerField(default=0) # player receives points when he correctly guesses who Alan is
-    #has_been_alan = models.BooleanField(default=False)
+    has_been_alan = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
@@ -14,8 +14,11 @@ class Problem(models.Model):
     alan = models.ForeignKey('Player', on_delete=models.CASCADE, default=1)
     text = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.text
+
     def get_alans_solution(self):
-        return self.solution_set.filter(author=self.alan)
+        return self.proposed_solutions.filter(author=self.alan).first()
 
     def reward_points(self):
         correct_solution = get_alans_solution(self)
@@ -40,3 +43,9 @@ class Solution(models.Model):
 class Guess(models.Model):
     player_guessing = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='guesses')
     solution = models.ForeignKey('Solution', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.player_guessing) + " votes for " + str(self.solution)
+
+    class Meta:
+        verbose_name_plural = "guesses"
