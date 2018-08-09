@@ -47,7 +47,7 @@ class GameConsumer(WebsocketConsumer):
         self.send_message(content)
 
     def fetch_players(self, data):
-        players = Player.objects.all()
+        players = Player.objects.filter(is_superuser=False)
         content = {
             'command': 'fetch_players',
             'players': helpers.players_to_json(players)
