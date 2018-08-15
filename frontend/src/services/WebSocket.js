@@ -66,7 +66,12 @@ class WebSocketService {
     this.sendMessage({ command: 'new_problem'});
   }
   sendNewSolution(solution, username, problem) {
-    this.sendMessage({command: 'new_solution', solution: solution, username: username, problem: problem});
+    this.sendMessage({
+      command: 'new_solution',
+      solution: solution,
+      username: username,
+      problem: problem
+    });
   }
 
   // Add callbacks for when commands are received from back end

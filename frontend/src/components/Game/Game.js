@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GameStatusBar from "../GameStatusBar";
 import ConditionalProblemDisplay from "../ConditionalProblemDisplay";
 import PlayersList from "../PlayersList";
+import SolutionsList from "../SolutionsList";
 import './Game.scss';
 
 import WebSocketInstance from '../../services/WebSocket'
@@ -12,7 +13,7 @@ export default class Game extends Component {
     this.state = {
       gameHasStarted: false,
       players: [],
-      solutions: [],
+      solutions: ['.'],
       problem: '',
       alan: '', // alan's username
       roundNumber: 0, // how many rounds have gone by?
@@ -58,10 +59,11 @@ export default class Game extends Component {
   }
 
   // Event handlers
-  handleSolutionSubmit = (solution) => {
+  handleSolutionSubmit = (event, solution) => {
+    event.preventDefault();
     WebSocketInstance.sendNewSolution(solution, this.props.currentUser, this.state.problem);
   }
-  startGame = (event) => {
+  startGame = () => {
     this.setState({ gameHasStarted: true});
     this.startRound();
   }
@@ -76,7 +78,6 @@ export default class Game extends Component {
     const gameHasStarted = this.state.gameHasStarted;
     return (
       <div className="game">
-        {/*<SolutionsList solutions={this.state.solutions} />*/}
         <GameStatusBar startGame={this.startGame}
           gameHasStarted={gameHasStarted}
           playerCount={this.state.players.length}
@@ -87,7 +88,10 @@ export default class Game extends Component {
           alan={this.state.alan}
           currentUser={this.props.currentUser}
           handleSolutionSubmit={this.handleSolutionSubmit} />
-        <PlayersList players={this.state.players} currentUser={this.props.currentUser} />
+        <PlayersList players={this.state.players}
+          currentUser={this.props.currentUser} />
+        <SolutionsList solutions={this.state.solutions}
+          solutionSubmitted={this.state.solutionSubmitted} />
       </div>
     );
   }

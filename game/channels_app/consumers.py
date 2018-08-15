@@ -74,9 +74,11 @@ class GameConsumer(WebsocketConsumer):
         username = data['username']
         solution_text = data['solution']
         problem_text = data['problem']
-        player = Player.objects.get(username=username)
-        problem = Problem.objects.get(text=problem_text)
-        solution = Solution.objects.create(author=player, solution_text=solution_text, problem=problem)
+        #player = Player.objects.get(username=username)
+        #problem = Problem.objects.get(text=problem_text)
+        #print(problem)
+        #solution = Solution.objects.create(author=player, solution_text=solution_text, problem=problem)
+        #print(solution)
         content = {
             'command': 'new_solution',
             'solution': solution_text

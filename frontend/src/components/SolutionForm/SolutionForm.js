@@ -21,7 +21,7 @@ export default class SolutionForm extends Component {
     return (
       <div className="solution-form">
         <H4>Write your solution in two words or less.</H4>
-        <form onSubmit={() => this.props.handleSolutionSubmit(this.state.solution)} className="form">
+        <form onSubmit={(event) => this.props.handleSolutionSubmit(event, this.state.solution)} className="form">
             <InputGroup id="text-input" leftIcon="edit" placeholder="Spicy Cheetos" onChange={this.solutionChangeHandler} />
             <Button icon="enter" text="Submit Solution" type="submit" />
         </form>

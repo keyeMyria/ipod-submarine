@@ -63,6 +63,8 @@ To do:
 2. rename things that are confusing (like problem text is just 'text' but solution text is 'solution_text')
 3. try to separate game logic js functions into different files
 4. implement persistent username state until disconnect
+
+
 5. work on SUBMIT SOLUTION for problem next. And then refreshing solutions for all users as well when a solution is submitted. 
 6. Then we can work on VOTING on solutions if all solutions have been submitted. Like allSolutionsSubmitted (boolean)
 7. Then we can work on tallying votes and determining who receives points.
