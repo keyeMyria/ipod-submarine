@@ -103,8 +103,17 @@ class GameConsumer(WebsocketConsumer):
             'command': 'new_solution',
             'solution': solution.solution_text
         }
-        self.send_message(content)
+        async_to_sync(self.channel_layer.group_send)(
+            self.game_room_name,
+            {
+                'type': 'solution.new',
+                'text': content
+            }
+        )
     
+    def solution_new(self, event):
+        self.send_message(event['text'])
+
     commands = {
         'add_player': add_player,
         'fetch_players': fetch_players,

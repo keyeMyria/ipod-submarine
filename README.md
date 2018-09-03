@@ -64,5 +64,8 @@ To do:
 8. After that we can work on logic for beginning a new round.
 9. and finally ending a game.
 
-sending problem to all users not working only individual users
-this wya game can start for everyone at the same time
+
+Known issues:
+
+1. If a user joins in the middle of a game, their view will be incorrect.
+2. Voting starts when all solutions are submitted. If a user is AFK, then he will stall the game.
