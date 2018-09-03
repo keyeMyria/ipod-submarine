@@ -18,6 +18,7 @@ export default class Game extends Component {
       alan: '', // alan's username
       roundNumber: 0, // how many rounds have gone by?
       roundHasEnded: false, // is the round still going?
+      solutionSubmitted: false,
     };
     this.waitForSocketConnection(() => {
       WebSocketInstance.addPlayer(this.props.currentUser);
@@ -62,6 +63,7 @@ export default class Game extends Component {
   // Event handlers
   handleSolutionSubmit = (event, solution) => {
     event.preventDefault();
+    this.setState({solutionSubmitted: true})
     WebSocketInstance.sendNewSolution(solution, this.props.currentUser, this.state.problem);
   }
   startGame = () => {
@@ -88,11 +90,11 @@ export default class Game extends Component {
           problem={this.state.problem}
           alan={this.state.alan}
           currentUser={this.props.currentUser}
-          handleSolutionSubmit={this.handleSolutionSubmit} />
+          handleSolutionSubmit={this.handleSolutionSubmit}
+          solutionSubmitted={this.state.solutionSubmitted} />
         <PlayersList players={this.state.players}
           currentUser={this.props.currentUser} />
-        <SolutionsList solutions={this.state.solutions}
-          solutionSubmitted={this.state.solutionSubmitted} />
+        <SolutionsList solutions={this.state.solutions} />
       </div>
     );
   }
