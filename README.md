@@ -59,14 +59,10 @@ yarn start
 
 To do:
 
-1. we can rewrite some stateless components as functions
-2. rename things that are confusing (like problem text is just 'text' but solution text is 'solution_text')
-3. try to separate game logic js functions into different files
-4. implement persistent username state until disconnect
-
-
-5. work on SUBMIT SOLUTION for problem next. And then refreshing solutions for all users as well when a solution is submitted. 
 6. Then we can work on VOTING on solutions if all solutions have been submitted. Like allSolutionsSubmitted (boolean)
 7. Then we can work on tallying votes and determining who receives points.
 8. After that we can work on logic for beginning a new round.
 9. and finally ending a game.
+
+sending problem to all users not working only individual users
+this wya game can start for everyone at the same time

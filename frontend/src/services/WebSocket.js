@@ -41,6 +41,7 @@ class WebSocketService {
     if (Object.keys(this.callbacks).length === 0) {
       return;
     }
+    console.log(command);
     if (command === 'add_player' ) {
       this.callbacks[command](parsedData.players);
     }
@@ -51,6 +52,10 @@ class WebSocketService {
       this.callbacks[command](parsedData.solution);
     }
     if (command === 'new_problem') {
+      this.callbacks[command](parsedData.problem, parsedData.alan);
+    }
+    if (command === 'start_round') {
+      console.log('dfidjfiosdfjio');
       this.callbacks[command](parsedData.problem, parsedData.alan);
     }
   }
@@ -72,6 +77,9 @@ class WebSocketService {
       username: username,
       problem: problem
     });
+  }
+  startGame() {
+    this.sendMessage({ command: 'start_game'});
   }
 
   // Add callbacks for when commands are received from back end

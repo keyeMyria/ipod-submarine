@@ -33,6 +33,38 @@ class GameConsumer(WebsocketConsumer):
         self.send(text_data=json.dumps(message))
 
     # Game Commands
+
+    def start_game(self, data):
+        problem = helpers.create_random_problem();
+        content = {
+            'command': 'start_round',
+            'problem': problem.text,
+            'alan': str(problem.alan),
+        }
+        async_to_sync(self.channel_layer.group_send)(
+            self.game_room_name,
+            {
+                'type': 'round.start',
+                'text': content
+            }
+        )
+
+    def round_start(self, event):
+        self.send_message(event['text'])
+
+    def add_player(self, data):
+        username = data['username']
+        player, created = Player.objects.get_or_create(username=username)
+        self.player = player
+        content = {
+            'command': 'join_game'
+        }
+        if not username:
+            content['error'] = 'Unable to get or create Player with username: ' + username
+            self.send_message(content)
+        content['success'] = 'Joined game as player: ' + username
+        self.send_message(content)
+
     def add_player(self, data):
         username = data['username']
         player, created = Player.objects.get_or_create(username=username)
@@ -57,31 +89,19 @@ class GameConsumer(WebsocketConsumer):
             self.game_room_name,
             {
                 'type': 'fetch_players',
-                'message': content
+                'text': content
             }
         )
     
-    def new_problem(self, data):
-        problem = helpers.create_random_problem();
-        content = {
-            'command': 'new_problem',
-            'problem': problem.text,
-            'alan': str(problem.alan),
-        }
-        self.send_message(content)
-    
     def new_solution(self, data):
-        username = data['username']
         solution_text = data['solution']
         problem_text = data['problem']
-        #player = Player.objects.get(username=username)
-        #problem = Problem.objects.get(text=problem_text)
-        #print(problem)
-        #solution = Solution.objects.create(author=player, solution_text=solution_text, problem=problem)
-        #print(solution)
+        player = self.player
+        problem = Problem.objects.get(text=problem_text)
+        solution = Solution.objects.create(author=player, solution_text=solution_text, problem=problem)
         content = {
             'command': 'new_solution',
-            'solution': solution_text
+            'solution': solution.solution_text
         }
         self.send_message(content)
     
@@ -89,5 +109,5 @@ class GameConsumer(WebsocketConsumer):
         'add_player': add_player,
         'fetch_players': fetch_players,
         'new_solution': new_solution,
-        'new_problem': new_problem,
+        'start_game': start_game
     }

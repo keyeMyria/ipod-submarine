@@ -26,6 +26,7 @@ export default class Game extends Component {
         'add_player': this.addPlayer.bind(this),
         'new_problem': this.setProblem.bind(this),
         'new_solution': this.addSolution.bind(this),
+        'start_round': this.startRound.bind(this),
       });
       WebSocketInstance.fetchPlayers();
     });
@@ -64,14 +65,14 @@ export default class Game extends Component {
     WebSocketInstance.sendNewSolution(solution, this.props.currentUser, this.state.problem);
   }
   startGame = () => {
-    this.setState({ gameHasStarted: true});
-    this.startRound();
+    WebSocketInstance.startGame();
   }
 
   // Other actions
-  startRound() {
+  startRound(problem, alan) {
+    this.setState({ gameHasStarted: true});
     this.setState({ roundNumber: this.state.roundNumber+1});
-    WebSocketInstance.getNewProblem();
+    this.setProblem(problem, alan);
   }
 
   render() {
