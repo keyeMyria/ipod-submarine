@@ -8,6 +8,7 @@ export default class SolutionsList extends Component {
     return solutions.map((solution, i) =>
         <Card key={i}>
             <p>{solution}</p>
+            {/* if have not voted and voting has started, then display vote for this solution here, else disable the button */}
         </Card>
     );
   }

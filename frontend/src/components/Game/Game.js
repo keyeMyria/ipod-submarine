@@ -63,7 +63,7 @@ export default class Game extends Component {
   // Event handlers
   handleSolutionSubmit = (event, solution) => {
     event.preventDefault();
-    this.setState({solutionSubmitted: true})
+    this.setState({solutionSubmitted: true});
     WebSocketInstance.sendNewSolution(solution, this.props.currentUser, this.state.problem);
   }
   startGame = () => {
@@ -76,6 +76,11 @@ export default class Game extends Component {
     this.setState({ roundNumber: this.state.roundNumber+1});
     this.setProblem(problem, alan);
   }
+  
+  //endRound() {
+  //  this.setState({solutionSubmitted: false});
+  // this.setState({ solutions: []});
+  //}
 
   render() {
     const gameHasStarted = this.state.gameHasStarted;

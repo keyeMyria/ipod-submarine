@@ -59,6 +59,7 @@ yarn start
 
 To do:
 
+5. Check if all solutions have been submitted when a solution is received --> if so, then toggle voting
 6. Then we can work on VOTING on solutions if all solutions have been submitted. Like allSolutionsSubmitted (boolean)
 7. Then we can work on tallying votes and determining who receives points.
 8. After that we can work on logic for beginning a new round.
@@ -69,3 +70,4 @@ Known issues:
 
 1. If a user joins in the middle of a game, their view will be incorrect.
 2. Voting starts when all solutions are submitted. If a user is AFK, then he will stall the game.
+3. The game can stutter.
